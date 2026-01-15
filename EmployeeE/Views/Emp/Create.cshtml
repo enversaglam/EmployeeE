@@ -1,0 +1,25 @@
+﻿@model EmployeeE.Models.Emp
+
+<h2>Yeni Çalışan Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Ad:</label>
+        <input asp-for="Ename" class="form-control" />
+        <span asp-validation-for="Ename" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Pozisyon:</label>
+        <input asp-for="Job" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Maaş:</label>
+        <input asp-for="Sal" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="form-group">
+        <label>Departman:</label>
+        <select asp-for="Deptno" class="form-control" asp-items="@(new SelectList(ViewBag.DeptList, "Deptno", "Dname"))"></select>
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
