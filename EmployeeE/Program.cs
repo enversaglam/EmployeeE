@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,3 +28,28 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+/*using Microsoft.EntityFrameworkCore;
+using System;
+using EmployeeE.Data;
+ 
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+  options.UseMySql(cs, ServerVersion.AutoDetect(cs)));
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
+app.MapControllerRoute(
+   name: "default",
+   pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();*/

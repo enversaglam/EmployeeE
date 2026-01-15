@@ -1,0 +1,65 @@
+Anleitung Database zu Code
+Entity Framework installieren
+dotnet tool install --global dotnet-ef
+ 
+Ins Projektverzeichnis wechseln und diese Pakete für MySQL installieren:
+ 
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+dotnet add package Microsoft.EntityFrameworkCore.Design
+ 
+ConnectionString anpassen in appsettings.json
+{
+ "Logging": {
+  "LogLevel": {
+    "Default": "Information",
+     "Microsoft.AspNetCore": "Warning"
+   }
+ },
+"AllowedHosts": "*",
+ 
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost;Database=produkte;User=root;Password=secret;"
+ }
+}
+ 
+Datenmodell und Annotationen generieren:
+dotnet ef dbcontext scaffold "Name=ConnectionStrings:DefaultConnection" Pomelo.EntityFrameworkCore.MySql --output-dir Models --context AppDbContext --context-dir Data --data-annotations
+ 
+Program.cs anpassen
+using Microsoft.EntityFrameworkCore;
+using MvcEfDbFirstDemo.Data;
+ 
+var builder = WebApplication.CreateBuilder(args);
+ 
+builder.Services.AddControllersWithViews();
+ 
+var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+ 
+builder.Services.AddDbContext<AppDbContext>(options =>
+  options.UseMySql(cs, ServerVersion.AutoDetect(cs)));
+ 
+var app = builder.Build();
+ 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+ 
+app.MapControllerRoute(
+   name: "default",
+   pattern: "{controller=Home}/{action=Index}/{id?}");
+ 
+app.Run();
+ 
+ 
+ 
+ 
+ 
+Bei Problemen ggf.eine alte Version nutzen:
+dotnet tool install dotnet-ef --version 8.*
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+ 
+dotnet restore
+dotnet clean
+dotnet build
+ 
+ 
