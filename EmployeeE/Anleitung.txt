@@ -23,7 +23,8 @@ ConnectionString anpassen in appsettings.json
 }
  
 Datenmodell und Annotationen generieren:
-dotnet ef dbcontext scaffold "Name=ConnectionStrings:DefaultConnection" Pomelo.EntityFrameworkCore.MySql --output-dir Models --context AppDbContext --context-dir Data --data-annotations
+dotnet ef dbcontext scaffold "Name=ConnectionStrings:DefaultConnection"
+Pomelo.EntityFrameworkCore.MySql --output-dir Models --context AppDbContext --context-dir Data --data-annotations
  
 Program.cs anpassen
 using Microsoft.EntityFrameworkCore;
