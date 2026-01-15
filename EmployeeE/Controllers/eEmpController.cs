@@ -5,11 +5,11 @@ using EmployeeE.Models;
 
 namespace EmployeeE.Controllers
 {
-    public class EmpController : Controller
+    public class eEmpController : Controller
     {
         private readonly AppDbContext _context;
 
-        public EmpController(AppDbContext context)
+        public eEmpController(AppDbContext context)
         {
             _context = context;
         }
