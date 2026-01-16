@@ -62,5 +62,15 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
 dotnet restore
 dotnet clean
 dotnet build
+
+
+---- 
+
+Controller generieren:
  
+Rechtsklick auf den Ordner Controllers
+Add
+New Scaffolded Item… ("Gerüstbau")
+MVC Controller with views, using Entity Framework
+Add
  

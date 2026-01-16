@@ -5,14 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h2>Employee</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New +</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Empno)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ename)
             </th>
@@ -41,6 +44,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Empno)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Ename)
             </td>
             <td>
@@ -62,9 +68,9 @@
                 @Html.DisplayFor(modelItem => item.MgrNavigation.Empno)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Empno">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Empno">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Empno">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Empno" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Empno" class="btn btn-sm btn-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Empno" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
 }

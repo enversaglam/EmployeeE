@@ -49,9 +49,13 @@ namespace EmployeeE.Controllers
         // GET: Emps/Create
         public IActionResult Create()
         {
-            ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Deptno");
-            ViewData["Mgr"] = new SelectList(_context.Emps, "Empno", "Empno");
-            return View();
+            ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Dname");
+            var managers = _context.Emps
+                .Where(e => _context.Emps.Select(m => m.Mgr).Contains(e.Empno))
+                .Select(e => new { e.Empno, DisplayText = e.Ename + " - " + e.DeptnoNavigation.Dname });
+            ViewData["Mgr"] = new SelectList(managers, "Empno", "DisplayText");
+            int nextEmpno = _context.Emps.Any() ? _context.Emps.Max(e => e.Empno) + 1 : 1;
+            return View(new Emp { Empno = nextEmpno });
         }
 
         // POST: Emps/Create
@@ -61,6 +65,12 @@ namespace EmployeeE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Empno,Ename,Job,Mgr,Hiredate,Sal,Comm,Deptno")] Emp emp)
         {
+            if (emp.Empno == 0)
+            {
+                emp.Empno = _context.Emps.Any() ? _context.Emps.Max(e => e.Empno) + 1 : 1;
+                ModelState.Remove("Empno");
+            }
+            ModelState.Remove("DeptnoNavigation");
             if (ModelState.IsValid)
             {
                 _context.Add(emp);
@@ -68,7 +78,10 @@ namespace EmployeeE.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Deptno", emp.Deptno);
-            ViewData["Mgr"] = new SelectList(_context.Emps, "Empno", "Empno", emp.Mgr);
+            var managers = _context.Emps
+                .Where(e => _context.Emps.Select(m => m.Mgr).Contains(e.Empno))
+                .Select(e => new { e.Empno, DisplayText = e.Ename + " - " + e.DeptnoNavigation.Dname });
+            ViewData["Mgr"] = new SelectList(managers, "Empno", "DisplayText", emp.Mgr);
             return View(emp);
         }
 
@@ -85,8 +98,11 @@ namespace EmployeeE.Controllers
             {
                 return NotFound();
             }
-            ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Deptno", emp.Deptno);
-            ViewData["Mgr"] = new SelectList(_context.Emps, "Empno", "Empno", emp.Mgr);
+            ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Dname", emp.Deptno);
+            var managers = _context.Emps
+                .Where(e => _context.Emps.Select(m => m.Mgr).Contains(e.Empno))
+                .Select(e => new { e.Empno, DisplayText = e.Ename + " - " + e.DeptnoNavigation.Dname });
+            ViewData["Mgr"] = new SelectList(managers, "Empno", "DisplayText", emp.Mgr);
             return View(emp);
         }
 
@@ -101,7 +117,7 @@ namespace EmployeeE.Controllers
             {
                 return NotFound();
             }
-
+            ModelState.Remove("DeptnoNavigation");
             if (ModelState.IsValid)
             {
                 try
@@ -123,7 +139,10 @@ namespace EmployeeE.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Deptno"] = new SelectList(_context.Depts, "Deptno", "Deptno", emp.Deptno);
-            ViewData["Mgr"] = new SelectList(_context.Emps, "Empno", "Empno", emp.Mgr);
+            var managers = _context.Emps
+                .Where(e => _context.Emps.Select(m => m.Mgr).Contains(e.Empno))
+                .Select(e => new { e.Empno, DisplayText = e.Ename + " - " + e.DeptnoNavigation.Dname });
+            ViewData["Mgr"] = new SelectList(managers, "Empno", "DisplayText", emp.Mgr);
 
             //ViewBag.DeptList = _context.Depts.ToList();
 
