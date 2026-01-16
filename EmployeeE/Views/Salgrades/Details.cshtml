@@ -1,0 +1,30 @@
+﻿@model EmployeeE.Models.Salgrade
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Salgrade</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Losal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Losal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hisal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hisal)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Grade">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

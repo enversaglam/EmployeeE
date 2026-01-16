@@ -1,0 +1,61 @@
+﻿@model EmployeeE.Models.Emp
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Emp</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ename)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ename)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Job)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Job)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hiredate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hiredate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeptnoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeptnoNavigation.Deptno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MgrNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MgrNavigation.Empno)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Empno">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

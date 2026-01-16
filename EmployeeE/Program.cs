@@ -35,6 +35,7 @@ using EmployeeE.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -62,5 +63,11 @@ app.UseRouting();
 app.MapControllerRoute(
    name: "default",
    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Use(async (context, next) =>
+{
+    context.Items["Controllers"] = new List<string> { "Home", "Depts", "Emps", "Salgrades" };
+    await next();
+});
 
 app.Run();

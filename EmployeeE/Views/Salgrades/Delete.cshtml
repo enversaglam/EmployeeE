@@ -1,0 +1,33 @@
+﻿@model EmployeeE.Models.Salgrade
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Salgrade</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Losal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Losal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hisal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hisal)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Grade" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
