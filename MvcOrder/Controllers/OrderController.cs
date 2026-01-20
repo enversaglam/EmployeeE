@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcOrder.Interfaces;
 using MvcOrder.Models;
+using System.Text.Json;
 
 namespace MvcOrder.Controllers
 {
@@ -46,9 +47,16 @@ namespace MvcOrder.Controllers
                 UnitPrice = price
             };
 
-            var totalPrice = _priceCalculator.CalculateTotal(bestellung);
+            var result = _priceCalculator.CalculateTotal(bestellung);
 
-            return Content($"Der Gesamtpreis beträgt: {totalPrice:C}");
+            //string output =
+            //    $"SubTotal: {result.SubTotal:C}\n" +
+            //    $"Discounted Total: {result.DiscountedTotal:C}\n" +
+            //    $"Tax (19%): {result.Tax:C}\n" +
+            //    $"Total: {result.Total:C}";
+            //return Content(output, "text/plain");
+            //return Json(result);
+            string json = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }); return Content($"<pre>{json}</pre>", "text/html");
         }
     }
 }

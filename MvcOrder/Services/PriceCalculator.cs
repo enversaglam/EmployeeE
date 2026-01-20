@@ -12,28 +12,40 @@ namespace MvcOrder.Services
         {
             _discountService = discountService;
         }
-        public decimal CalculateTotal(Order order)
+        public OrderResultViewModel CalculateTotal(Order order)
         {
             var subTotal = order.Quantity * order.UnitPrice;
+            decimal quantityDiscount = 0m;
 
             if (order == null)
             {
                 throw new ArgumentNullException(nameof(order));
             } else if ( order.Quantity >= 10)
             {
-                subTotal *= 0.90m; // %10 Rabatt
+                quantityDiscount = subTotal * 0.10m;
+                subTotal -= quantityDiscount; // %10 Rabatt
             } else if ( order.Quantity >= 5)
             {
-                subTotal *= 0.95m; // %5 Rabatt
+                quantityDiscount = subTotal * 0.05m;
+                subTotal -= quantityDiscount; // %5 Rabatt
             }
 
             var discountedTotal = _discountService.ApplyDiscount(subTotal);
 
 
-            var total = subTotal * 1.19m; // 19% MwSt
+            var total = discountedTotal * 1.19m; // 19% MwSt
 
 
-            return total;
+            return new OrderResultViewModel
+            {
+                BaseTotal = order.Quantity * order.UnitPrice,
+                QuantityDiscount = quantityDiscount,
+                SubTotal = subTotal,
+                SeasonalDiscount = subTotal - discountedTotal,
+                DiscountedTotal = discountedTotal,
+                Tax = total - discountedTotal,
+                Total = total
+            };
 
         }
     }

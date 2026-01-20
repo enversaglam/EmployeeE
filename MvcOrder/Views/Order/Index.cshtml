@@ -21,6 +21,35 @@
 
 @if (ViewBag.Total != null)
 {
-    <h3 class="mt-3">Total Price: @ViewBag.Total €</h3>
+    var result = (MvcOrder.Models.OrderResultViewModel)ViewBag.Total;
+
+    <hr />
+    <h3>Calculation Result</h3>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>BaseTotal</th>
+            <td>@result.BaseTotal EUR</td>
+        </tr>
+        <tr>
+            <th>QuantityDiscount</th>
+            <td>@result.QuantityDiscount EUR</td>
+        </tr>
+        <tr>
+            <th>SubTotal</th>
+            <td>@result.SubTotal EUR</td>
+        </tr>
+        <tr>
+            <th>Discounted Total (After Black Friday)</th>
+            <td>@result.DiscountedTotal EUR</td>
+        </tr>
+        <tr>
+            <th>Tax (19%)</th>
+            <td>@result.Tax EUR</td>
+        </tr>
+        <tr>
+            <th><strong>Total</strong></th>
+            <td><strong>@result.Total EUR</strong></td>
+        </tr>
+    </table>
 }
-)

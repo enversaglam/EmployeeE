@@ -4,6 +4,6 @@ namespace MvcOrder.Interfaces
 {
     public interface IPriceCalculator
     {
-        decimal CalculateTotal(Order order);
+        OrderResultViewModel CalculateTotal(Order order);
     }
 }
