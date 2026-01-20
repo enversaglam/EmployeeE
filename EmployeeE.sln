@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeE", "EmployeeE\EmployeeE.csproj", "{69959198-9919-483B-9E48-A6D9F7F72903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcOrder", "MvcOrder\MvcOrder.csproj", "{F1C8A79E-0ADE-43A6-A76A-BE5D0E61A9F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{69959198-9919-483B-9E48-A6D9F7F72903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69959198-9919-483B-9E48-A6D9F7F72903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69959198-9919-483B-9E48-A6D9F7F72903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1C8A79E-0ADE-43A6-A76A-BE5D0E61A9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C8A79E-0ADE-43A6-A76A-BE5D0E61A9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C8A79E-0ADE-43A6-A76A-BE5D0E61A9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C8A79E-0ADE-43A6-A76A-BE5D0E61A9F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
