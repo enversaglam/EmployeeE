@@ -10,9 +10,23 @@ builder.Services.AddControllersWithViews();
 
 // Add services private services to the container.
 // Wenn jemand eine IPriceCalculator anfordert, wird eine Instanz von PriceCalculator bereitgestellt.
-builder.Services.AddScoped<IPriceCalculator, PriceCalculator>();
+builder.Services.AddTransient<IPriceCalculator, PriceCalculator>();
+// builder.Services.AddScoped<IPriceCalculator, PriceCalculator>();
 // Discount service registration
 builder.Services.AddScoped<IDiscountService, BlackFridayDiscountService>();
+
+// bei Singleton wird alles in dieselbe Log-Instanz geschrieben
+// builder.Services.AddSingleton<IRequestLog, RequestLog>();
+
+// bei Transient lebt der Log pro "Verwendung", d.h. einmal im Controller
+// und einmal im Service, aber auch NUR für einen Aufruf
+// builder.Services.AddTransient<IRequestLog, RequestLog>();
+
+// Service lebt über die Lebensdauer eines Requests (inkl. Redirection)
+// und auch, wenn RequestLog sowohl vom Controller, als auch vom PaymentService
+// genutzt wird. 
+builder.Services.AddScoped<IRequestLog, RequestLog>();
+builder.Services.AddScoped<PaymentService>();
 
 
 var app = builder.Build();

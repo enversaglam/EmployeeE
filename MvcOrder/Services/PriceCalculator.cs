@@ -7,7 +7,7 @@ namespace MvcOrder.Services
     public class PriceCalculator : IPriceCalculator
     {
         private readonly IDiscountService _discountService;
-
+        // Konstruktor
         public PriceCalculator(IDiscountService discountService)
         {
             _discountService = discountService;
@@ -20,11 +20,13 @@ namespace MvcOrder.Services
             if (order == null)
             {
                 throw new ArgumentNullException(nameof(order));
-            } else if ( order.Quantity >= 10)
+            }
+            else if (order.Quantity >= 10)
             {
                 quantityDiscount = subTotal * 0.10m;
                 subTotal -= quantityDiscount; // %10 Rabatt
-            } else if ( order.Quantity >= 5)
+            }
+            else if (order.Quantity >= 5)
             {
                 quantityDiscount = subTotal * 0.05m;
                 subTotal -= quantityDiscount; // %5 Rabatt
